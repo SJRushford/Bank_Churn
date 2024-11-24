@@ -1,0 +1,266 @@
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:z="http://www.zotero.org/namespaces/export#"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:vcard="http://nwalsh.com/rdf/vCard#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:bib="http://purl.org/net/biblio#"
+ xmlns:prism="http://prismstandard.org/namespaces/1.2/basic/"
+ xmlns:dcterms="http://purl.org/dc/terms/">
+    <bib:Book rdf:about="#item_3">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Sebastopol, CA</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>O'Reilly Media Inc.</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Adler</foaf:surname>
+                        <foaf:givenName>Joseph</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>R, Bank Churn</dc:subject>
+        <dc:title>R in a Nutshell</dc:title>
+        <dc:date>2012</dc:date>
+        <prism:edition>2</prism:edition>
+    </bib:Book>
+    <bib:Document rdf:about="https://tutorials.inbo.be/tutorials/r_citations_markdown/">
+        <z:itemType>blogPost</z:itemType>
+        <dcterms:isPartOf>
+           <z:Blog><dc:title>INBO Tutorials</dc:title></z:Blog>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Van Calster</foaf:surname>
+                        <foaf:givenName>Hans</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Vanderhaeghe</foaf:surname>
+                        <foaf:givenName>Floris</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>Citations in R Markdown</dc:title>
+        <dcterms:abstract>How to use Rstudio's citation tools to cite publications and create bibliographies</dcterms:abstract>
+        <dc:date>2021</dc:date>
+        <z:language>en</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://tutorials.inbo.be/tutorials/r_citations_markdown/</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+    </bib:Document>
+    <bib:Book rdf:about="https://rafalab.dfci.harvard.edu/dsbook-part-2/">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+           <foaf:Organization><foaf:name>Harvard</foaf:name></foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Irizarry</foaf:surname>
+                        <foaf:givenName>Rafael A</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>Introduction to Data Science</dc:title>
+        <dc:date>2019</dc:date>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rafalab.dfci.harvard.edu/dsbook-part-2/</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+    </bib:Book>
+    <bib:Book rdf:about="#item_6">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+           <foaf:Organization><foaf:name>Harvard</foaf:name></foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Irizarry</foaf:surname>
+                        <foaf:givenName>Rafael A.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Bank Churn</dc:subject>
+        <dc:subject>Data Science</dc:subject>
+        <dc:subject>R</dc:subject>
+        <dc:title>Advanced Data Science</dc:title>
+        <dc:date>2019</dc:date>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rafalab.dfci.harvard.edu/dsbook-part-2/</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+    </bib:Book>
+    <bib:BookSection rdf:about="https://f0nzie.github.io/machine_learning_compilation/data-visualization-for-ml-models.html">
+        <z:itemType>bookSection</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Book>
+               <dc:title>A Machine Learning Compilation</dc:title>
+            </bib:Book>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Reyes</foaf:surname>
+                        <foaf:givenName>Alfonso R</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Bank Churn</dc:subject>
+        <dc:subject>Data Science</dc:subject>
+        <dc:subject>R</dc:subject>
+        <dc:title>Chapter 7 Data Visualization for ML Models</dc:title>
+        <dc:date>2018</dc:date>
+        <z:language>en</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://f0nzie.github.io/machine_learning_compilation/data-visualization-for-ml-models.html</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+    </bib:BookSection>
+    <bib:Document rdf:about="https://sebastiansauer.github.io/ordering-bars/">
+        <z:itemType>blogPost</z:itemType>
+        <dcterms:isPartOf>
+           <z:Blog></z:Blog>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Sauer</foaf:surname>
+                        <foaf:givenName>Sebastian</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Bank Churn</dc:subject>
+        <dc:subject>Data Science</dc:subject>
+        <dc:subject>R</dc:subject>
+        <dc:title>Sorting the x-axis in Bargraphs Using ggplot2</dc:title>
+        <dc:date>2017</dc:date>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://sebastiansauer.github.io/ordering-bars/</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <z:type>Git Hub</z:type>
+    </bib:Document>
+    <bib:Document rdf:about="https://statsandr.com/blog/correlation-coefficient-and-correlation-test-in-r/">
+        <z:itemType>blogPost</z:itemType>
+        <dcterms:isPartOf>
+           <z:Blog><dc:title>Stats and R</dc:title></z:Blog>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Soetewey</foaf:surname>
+                        <foaf:givenName>Antoine</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>Correlation Coefficient and Correlation Test in R</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://statsandr.com/blog/correlation-coefficient-and-correlation-test-in-r/</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+    </bib:Document>
+    <rdf:Description rdf:about="https://www.kaggle.com/datasets/gauravtopre/bank-customer-churn-dataset">
+        <z:itemType>dataset</z:itemType>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Topre</foaf:surname>
+                        <foaf:givenName>Gaurav</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>Bank Customer Churn Dataset</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.kaggle.com/datasets/gauravtopre/bank-customer-churn-dataset</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <z:type>csw</z:type>
+    </rdf:Description>
+    <bib:Document rdf:about="https://www.geeksforgeeks.org/contour-of-knn-model-in-ggplot-using-r/">
+        <z:itemType>blogPost</z:itemType>
+        <dcterms:isPartOf>
+           <z:Blog></z:Blog>
+        </dcterms:isPartOf>
+        <dc:subject>Data Science</dc:subject>
+        <dc:subject>R</dc:subject>
+        <dc:title>Contour of KNN Model in ggplot Using R</dc:title>
+        <dc:date>July 19, 2024</dc:date>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.geeksforgeeks.org/contour-of-knn-model-in-ggplot-using-r/</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+    </bib:Document>
+    <bib:Document rdf:about="https://www.statology.org/dplyr-convert-multiple-columns-to-factor/">
+        <z:itemType>blogPost</z:itemType>
+        <dcterms:isPartOf>
+           <z:Blog></z:Blog>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Bobbitt</foaf:surname>
+                        <foaf:givenName>Zach</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>How to Convert Multiple Columns to Factor Using dplyr</dc:title>
+        <dc:date>January 20, 2023</dc:date>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.statology.org/dplyr-convert-multiple-columns-to-factor/</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+    </bib:Document>
+    <z:Collection rdf:about="#collection_1">
+        <dc:title>Bank Churn</dc:title>
+        <dcterms:hasPart rdf:resource="#item_3"/>
+        <dcterms:hasPart rdf:resource="https://tutorials.inbo.be/tutorials/r_citations_markdown/"/>
+        <dcterms:hasPart rdf:resource="https://rafalab.dfci.harvard.edu/dsbook-part-2/"/>
+        <dcterms:hasPart rdf:resource="#item_6"/>
+        <dcterms:hasPart rdf:resource="https://f0nzie.github.io/machine_learning_compilation/data-visualization-for-ml-models.html"/>
+        <dcterms:hasPart rdf:resource="https://sebastiansauer.github.io/ordering-bars/"/>
+        <dcterms:hasPart rdf:resource="https://statsandr.com/blog/correlation-coefficient-and-correlation-test-in-r/"/>
+        <dcterms:hasPart rdf:resource="https://www.kaggle.com/datasets/gauravtopre/bank-customer-churn-dataset"/>
+        <dcterms:hasPart rdf:resource="https://www.geeksforgeeks.org/contour-of-knn-model-in-ggplot-using-r/"/>
+        <dcterms:hasPart rdf:resource="https://www.statology.org/dplyr-convert-multiple-columns-to-factor/"/>
+    </z:Collection>
+</rdf:RDF>
