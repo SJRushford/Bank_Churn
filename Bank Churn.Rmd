@@ -2,8 +2,8 @@
 title: "Predicting Bank Churn"
 author: "Scott Rushford"
 date: "`r Sys.Date()`"
-output:
-  pdf_document: default
+output: pdf_document
+fontsize: 12pt
 bibliography: references.bib
 ---
 
@@ -11,17 +11,9 @@ bibliography: references.bib
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Predicting Bank Churn
+## Introduction
 
-[@base]
-
-```{r R version, echo=FALSE}
-version$version.string
-```
-
-## Executive Summary
-
-The ABC Multinational Bank, operating in France, Germany and Spain, is looking to improve customer retention. They have provided customer data of account holders found on [Kaggle](https://www.kaggle.com/datasets/gauravtopre/bank-customer-churn-dataset) to use for this purpose. The object of this project is to develop a classification algorithm using R programming to predict bank churn.
+The ABC Multinational Bank, operating in France, Germany and Spain, is looking to improve customer retention. They have provided customer data of account holders found on [Kaggle](https://www.kaggle.com/datasets/gauravtopre/bank-customer-churn-dataset) to use for this purpose. [@topre] The object of this project is to develop a classification algorithm using R programming to predict bank churn.
 
 ```{r Libraries and Data, include=FALSE}
 if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
@@ -48,9 +40,9 @@ The data frame consists of 10,000 rows of bank customers containing 12 columns o
 
 2.  Credit Score - a numeric value indicating the customer's current credit score
 
-3.  Country - a factor of 3 levels: France, Germany, Spain indicating the customer's country of residence.
+3.  Country - a factor of 3 country categories: France, Germany, Spain indicating the customer's country of residence.
 
-4.  Gender - a factor of 2 levels: Male, Female.
+4.  Gender - a factor of 2 categories: Male, Female.
 
 5.  Age - a numeric value indicating the customer's age.
 
@@ -60,15 +52,13 @@ The data frame consists of 10,000 rows of bank customers containing 12 columns o
 
 8.  Number of Products - a numeric value indicating the number of bank products the customer holds.
 
-9.  Credit Card - a factor of 2 levels represented by 0 = no card, 1 = card.
+9.  Credit Card - a factor of 2 categories represented by 0 = no card, 1 = card.
 
-10. Active Member - a factor of 2 levels represented by 0 = not active, 1 = active with a mean of 0.5151.
+10. Active Member - a factor of 2 categories represented by 0 = not active, 1 = active with a mean of 0.5151.
 
 11. Estimated Salary - the customer's salary as estimated by the bank.
 
 12. Churn - Churn is a factor of 2 levels represented by 0 = customer, 1 = churn with a mean of 0.2037 and is the target for prediction.
-
-[@topre]
 
 The key steps involved in this project included:
 
@@ -86,7 +76,9 @@ The key steps involved in this project included:
 
 ### Correlation and Principle Component Analysis
 
-A Correlation Analysis and a Principle Component Analysis was run on the data. These analyses do not show a significant correlation between any of the variables and churn, but does suggest some correlation between churn, gender, age and bank balance.
+To measure correlation amongst the variables and component importance in the data set columns a Correlation Analysis [@soetewey] and a Principle Component Analysis was run on the data. The correlation analysis was plotted to visualize the results. [@corrplot]. The plot does not show any correlation greater than 0.5, but does suggest some correlation between churn, gender, age and bank balance.
+
+The proportion of variance in the principal component analysis ranges from 5.5% to 13.07%, suggesting that there is no strong component that can explain the majority of the data.
 
 ```{r Correlation Plot, echo=FALSE}
 
@@ -109,10 +101,6 @@ CCA <- cor(churn_CA)
 corrplot(CCA, method = "color")
 ```
 
-[@corrplot]
-
-The lack of any strong correlation between any of the variables and churn are confirmed in the Principal Component Analysis where the proportion of variance ranges from 5.5% to 13.07%.
-
 ```{r Normalize, include=FALSE}
 churn_norm <- as_tibble(scale(churn_CA))
 
@@ -131,8 +119,6 @@ summary(churn_pca)
 ```{r PCA Biplot, include=FALSE}
 biplot(churn_pca, scale = 0)
 ```
-
-[@soetewey][@irizarry2019]
 
 ### Data Visualization
 
@@ -185,7 +171,7 @@ boxplot(score ~ churn, data = churn)
 
 ```
 
-The box plots for churn and credit score show similarities in median, and upper and lower quantiltes. The lower extreme for churn (1) extends below that of customers (0) with outliers which would indicate that a credit score of less than that 400 would increase the probability of churn.
+The box plots for churn and credit score show similarities in median, and upper and lower quartiles. The lower extreme for churn (1) extends below that of customers (0) with outliers which would indicate that a credit score of less than that 400 would increase the probability of churn.
 
 ```{r Boxplot Age, echo=FALSE}
 boxplot(age ~ churn, data = churn)
@@ -197,11 +183,13 @@ The median, upper and lower quartiles and upper extreme are higher for churn (1)
 boxplot(balance ~ churn, data = churn)
 ```
 
-The median, upper and lower quartiles and upper extreme are higher for churn (1) than customer (0). The box plot suggests that the probability of churn increases as customers begin to carry a bank balance that exceeds 100,000. increase the probability of churn.
+The median, upper and lower quartiles and upper extreme are higher for churn (1) than customer (0). The box plot suggests that the probability of churn increases as customers begin to carry a bank balance that exceeds 150,000.
 
-[@base][@irizarry2019a]
+[@base]
 
 ### Histograms
+
+Histograms were created for 6 variables (credit score, age, tenure, bank balance, products and salary) to visualize their distribution among the bank's customers.
 
 ```{r Histograms, include=FALSE}
 h1 <- churn %>% 
@@ -235,10 +223,12 @@ h6 <- churn %>%
 
 ```{r Histograms Grid, echo=FALSE}
 
-grid.arrange(h1, h2, h3, h4, h5, h6, nrow = 2, ncol = 3)
+grid.arrange(h1, h2, h3, h4, h5, h6, nrow = 3, ncol = 2)
 ```
 
-[@gridExtra][@ggplot2]
+[@gridExtra]
+
+[@ggplot2]
 
 From examining the histograms a profile of the typical ABC Bank customer begins to emerge:
 
@@ -250,7 +240,11 @@ From examining the histograms a profile of the typical ABC Bank customer begins 
 
 4.  maintains a bank balance of 100,000 to 150,000
 
-5.  has 1 or 2 of the banks 4 products.
+5.  has 1 or 2 of the bank's products.
+
+### Bar Graphs
+
+Bar graphs were created to provide additional insight into the customer base.
 
 ```{r Bar Graphs, include=FALSE}
 b1 <- churn %>% 
@@ -277,21 +271,17 @@ b4 <- churn %>%
 grid.arrange(b1, b2, b3, b4, nrow = 2, ncol = 2)
 ```
 
-[@ggplot2][@gridExtra]
-
-The bar graphs provide additional insight into the customer base:
-
-1.  Approximately half of their 10000 customers reside in France with the remaining 5000 split equally between Spain and Germany.
+1.  Approximately 5,000 customers reside in France with 2,500 each living in Spain and Germany.
 
 2.  Males make up 55% of the customer base and 45% are Female.
 
-3.  The number of active members make up just over half the dataset.
+3.  Active members make up over 50% of the data set.
 
 4.  The churn rate is over 20%.
 
 ### Line Plots
 
-Line plots were created to compare churn against all variables. Since this is a classification problem the GAM (General Additive Model) method was used for most of the plots except for the active, products and card variables where the LM (Linear Model) method was used.
+Line plots were created to compare churn, on the x axis, against all key variables, on the y axis. Since this is a classification problem, the GAM (General Additive Model) method was used for most of the plots except for the active, products and card variables where the LM (Linear Model) method was used. [@ggplot2-2]
 
 ```{r Line plots, include=FALSE}
 # Plots
@@ -330,18 +320,16 @@ p8 <- churn %>%
 ```
 
 ```{r Line Plots Grid, echo=FALSE}
-grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, nrow = 2, ncol = 4)
+grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, nrow = 4, ncol = 2)
 ```
 
-[@ggplot2][@gridExtra]
-
-The line plots confirm the observations seen in other visuals: churn rate increases for customers with a credit score less than 500. The probability of churn increases for customers over 40 years of age, peaks at age 50 and then decreases at a similar rate. The probability churn increases as customers begin carrying account balances greater than 150,000.
+The line plots confirm the observations seen in other visuals: churn rate increases for customers with a credit score less than 500. The probability of churn increases for customers over 40 years of age, peaks at age 50 and then decreases at a similar rate. The probability of churn increases as customers begin carrying account balances greater than 150,000.
 
 ### Baseline
 
-In order to compare the models developed in this project, 2 baseline models were created. The first model consisted of a random draw of 0s and 1s producing a random list of 5000 zeros and 5000 ones. When the random list was compared to the actual data set it predicted the actual at an accuracy rate of 50.02%. This model is referred to as: random_n.
+In order to compare the models developed in this project, 2 baseline models were created. The first model consisted of a random draw of 0s and 1s producing a random list of 5000 zeros and 5000 ones. When the random list was compared to the actual data set it predicted the actual at an accuracy rate of 50.02%. This model is referred to as: r_n.
 
-The second model was a random set of 0s and 1s in proportion to what appears in the data set. This produced a random list with 79.63% of the numbers being 0 and 20.37% of the numbers being 1. When this model was compared to the actual data set it was accurate to 67.33%. This model is referred to as: random_p.
+The second model is a random set of 0s and 1s in proportion to what appears in the data set. This produced a random list with 79.63% of the numbers being 0 and 20.37% of the numbers being 1. When this model was compared to the actual data set it was accurate to 67.33%. This model is referred to as: r_p.
 
 ```{r Random Samples, include=FALSE}
 set.seed(3)
@@ -368,24 +356,22 @@ score_random_p <- bind_cols(as.numeric(random_p),as.numeric(churn$churn)) %>%
 
 score_p <- sum(score_random_p$score)/10000
 
-scores <- data.frame(model=c('random_n', 'random_p'),
+scores <- data.frame(model=c('r_n', 'r_p'),
                              score=c(0.5002, 0.6733),
                      PPV=c(0,0), NPV=c(0, 0))
 ```
 
-[@base]
-
 ### Data Preparation
 
-In order to use the machine learning algorithms that data was changed in the following ways:
+In order to use the machine learning algorithms the data was changed in the following ways:
 
 1.  Columns were renamed for simplification.
 
 2.  Country and Gender were changed from character strings to factors.
 
-3.  The variables active, card and the predicted value churn were converted from numeric to factors.
+3.  The variables active, card and the predicted value churn were converted from numeric to factors. [@bobbitt2023]
 
-4.  Customer ID and Estimated Salary were removed from the data set. The ID number is a unique or independent variable so it has no predictive value. As salary is an estimated value and there is no data indicating how that estimated was made or its accuracy therefore, the variable was removed.
+4.  Customer ID and Estimated Salary were removed from the data set. The ID number is a unique or independent variable so it has no predictive value. As salary is an estimated value and there is no data indicating how that estimate was made or its accuracy, the variable was removed.
 
 5.  The data was normalized for classification.
 
@@ -398,7 +384,7 @@ churn_cdp <- churn %>%
 
 ## Optimize, Train, Test and Validate
 
-The data set was partitioned by a ratio of 60:20:20 into sets from training, testing and validation respectively.
+In order to provide enough data to the training set without creating an issue with over training, 60% of the data was allocated to training with 20% saved for each of the testing and validation sets.
 
 ```{r Data Partition, include=FALSE}
 # Create training, test and validation sets 60:20:20 @caret
@@ -414,25 +400,23 @@ val_churn <- train_churn[-test_index, ]
 control <- trainControl(method = "cv", number = 10, p = .9)
 ```
 
-[@caret]
-
 The following process was followed for each model
 
-1.  Optimization of the model parameters using cross validation and bootstrapping methods.
+1.  Optimization of the model parameters using cross validation and bootstrapping methods
 
-2.  Model Creation.
+2.  Train Model
 
-3.  Train Model
+3.  Test Model
 
-4.  Test Model
+4.  Validate Model
 
-5.  Validate Model on the entire data set
-
-6.  Evaluate each model based on its overall accuracy and its positive and negative predictive values. The positive value in this instance is 0, being a current customer and the negative value is 1, churn or not being a customer.
+5.  Evaluate each model based on its overall accuracy and its positive and negative predictive values. The positive value in this instance is 0, being a current customer and the negative value is 1, churn or not being a customer.
 
 ### k Nearest Neighbor
 
-The k Nearest Neighbor model was created with k = 33. This means that each point is compared to the next closest 33 points, the neighborhood, and computes the average of 0s and 1s in each neighborhood.
+In order to predict the class of customer, the k Nearest Neighbor algorithm looks at the k nearest values in the training set to predict the new value. [@adler2012]. By using the train function in the caret package it was determined that k was optimized at 33. [@kuhn2007]. This means that each point is compared to the next closest 33 points, the neighborhood, and computes the average of 0s and 1s in each neighborhood.
+
+The following graph demonstrates how the various test of k increase the accuracy of the model until its optimization point at 33. Increasing k beyond 33 decreases the model accuracy.
 
 ```{r knn opt, include=FALSE}
 set.seed(3)
@@ -440,7 +424,7 @@ churn_knn <- train(churn ~ ., method = "knn",
                data = churn_cdp, tuneGrid = data.frame(k = seq(11, 71, 2)))
 ```
 
-```{r}
+```{r echo=FALSE}
 ggplot(churn_knn, highlight = TRUE)
 ```
 
@@ -507,17 +491,15 @@ comp_knn3 <- data.frame(Model=c('Test', 'Validate'),
 print(comp_knn3)
 ```
 
-[@caret][@contour2024]
+The decision graph confirms that as age and balance increase the algorithm was assigning that as 1 (churn). [@contour2024]
 
-The decision graph confirms that as age and balance increase the algorithm was assigning that as 1 (churn).
+The variance in the accuracy (0.002) of the Test and Validation sets do not show any signs of over-training or over-smoothing.
 
-The accuracy of the Test and Validation sets do not show any signs of over-training or over-smoothing.
-
-This algorithm has the ability to predict on new data.
+This algorithm has the ability to predict new values.
 
 ### Classification Trees
 
-A Classification Tree model was created using a complexity parameter of 0.004166667, this is the minimum improvement required for the tree to create a new node. The variable used in tree construction are: active, age, balance, country, products and score. The model made 1223 correct predictions out of 6001 observations for a root node error of 0.2038.
+A Classification Tree [@rpart]is created using a complexity parameter which is the minimum improvement required for the tree to create a new node or branch. [@adler2012]. The complexity parameter for this tree is optimized at 0.004166667, as seen in the following graph. The variables used in tree construction are: active, age, balance, country, products and score. The first split of the model occurs at the normalized value for age at 0.34. The model made 1223 correct predictions out of 6001 observations for a root node error of 0.2038.
 
 ```{r ct opt, include=FALSE}
 # Classification Trees
@@ -591,13 +573,11 @@ comp_rpart <- data.frame(Model=c('Test', 'Validate'),
 print(comp_rpart)
 ```
 
-The Test and Validation results do not indicate any issues with the Classification Tree model and it ability to predict on new data.
-
-[@caret] [@ggplot] [@rpart] [@maptree]
+The tree was created with 17 nodes as illustrated in the above visual. [@maptree]The Test and Validation accuracy variance is 0.001 which would not indicate any issues with the Classification Tree model and it ability to predict new values.
 
 ### SVM - Support Vector Machine
 
-The radial method was used to create the SVM model with the parameters set to sigma = 0.06574296 and Cost = 1 from the results of optimization which created 2154 support vectors.
+Support Vector Machines [@e1071] [@kernlab]do not necessarily use all the data to train the model, it may only use some observations which are the support vectors. [@adler2012]. The radial method was used to create the SVM model with the parameters set to sigma = 0.06574296 and Cost = 1 from the results of optimization which created 2154 support vectors.
 
 ```{r svm opt, include=FALSE}
 if(!require(e1071)) install.packages("e1071", repos = "http://cran.us.r-project.org")
@@ -611,7 +591,7 @@ churn_svmtr <- train(churn ~ ., method = "svmRadial", data = churn_cdp,
                      trControl = control)
 ```
 
-```{r Optimize SVM, echo=TRUE}
+```{r Optimize SVM, echo=FALSE}
 ggplot(churn_svmtr, highlight = TRUE)
 ```
 
@@ -659,13 +639,11 @@ comp_svm <- data.frame(Model=c('Test', 'Validate'),
 print(comp_svm)
 ```
 
-The SVM model produces an overall accuracy level of 86.12% with the 95% confidence interval of (0.8543, 0.8679). The positive predictive value is 86.41% and the negative predictive value is 83.42%.
-
-[@e1071][@kernlab][@adler2012]
+The accuracy variance in the SVM model is 0.007, certainly the most variance seen so far, but not significant enough to think that the model is problematic.
 
 ### Random Forest
 
-The Random Forest model was built using an minimum node of 140 and mtry set at 4, which is the number of variables to sample randomly as candidate at each split.
+The Random Forest algorithm [@randomForest] [@Rborist]is used to "build a series of trees from a random sample of the observations in the test data, random forests build trees from a random sample of the columns in the test data." [@adler2012]. After optimization, the model was built using an minimum node of 140 and mtry set at 4. The mtry argument controls the number of variables to sample randomly as candidates at each split. The following graphs illustrate how accuracy decreases as the minimum node becomes greater than 140 and how the Out-of-Bag (OOB) error decreases as mtry increases from 1 to 4.
 
 ```{r rf opt , include=FALSE}
 # load library for random forest
@@ -689,7 +667,7 @@ rf_tune <- tuneRF(x, churn_cdp$churn, mtryStart = 1 , ntreeTry=200, stepFactor=2
        trace=TRUE, plot=TRUE, doBest=FALSE)
 ```
 
-```{r Optimize RF, echo=TRUE}
+```{r Optimize RF, echo=FALSE}
 plot(churn_rf)
 ```
 
@@ -723,7 +701,7 @@ scores <- scores %>%
 
 ```
 
-```{r rf test validate comp}
+```{r rf test validate comp, echo=FALSE}
 # Compare Test and Validate
 comp_rf <- data.frame(Model=c('Test', 'Validate'),
                         Accuracy=c(cm_rf$overall["Accuracy"],
@@ -741,9 +719,12 @@ comp_rf <- data.frame(Model=c('Test', 'Validate'),
 print(comp_rf)
 ```
 
-The Random Forest model is nearly 100% accurate. Skeptical of these results mtry values of 2 and 3 were also tested which produced results from the low to high 90s. An mtry value less than 4 would produce a more conservative prediction.
+```{r var importance, echo=FALSE}
+# Variable Importance in the rft model
+varImpPlot(churn_rft)
+```
 
-[@randomForest][@Rborist]
+As seen in the above graph, age, balance and score are the 3 most important variables in the Random Forest model. The model is nearly 100% accurate with an accuracy variance of just -0.0003. The NPV of both the test and validation sets was 1, which is important in the ability for the model to predict bank churn.
 
 ## Results
 
@@ -785,12 +766,16 @@ s3 <-  scores %>%
 grid.arrange(s1, s2, s3, ncol = 3)
 ```
 
-[@dplyr][@ggplot2][@gridExtra]
-
 ## Conclusion
 
-The purpose of this exercise was to created a machine learning algorithm to predict bank churn using the Bank Churn Dataset. This is best achieved using the Random Forest model developed in this study. Random Forest has an overall accuracy of 90.07%, but more importantly its NPV - ability to predict churn is 95.4%.
+The purpose of this exercise was to create a machine learning algorithm to predict bank churn using the Bank Churn Dataset. This is best achieved using the Random Forest model developed in this study. Random Forest has an overall accuracy of 100% in predicting bank churn.
 
-The ability to predict churn gives the ABC Multinational Bank a tool to uncover customers who are in danger of leaving the Bank.
+The ability to predict churn gives the ABC Multinational Bank a tool to uncover customers who are in danger of leaving the Bank. If the goal is to prevent customer churn, a model that may overestimate churn is preferable to one that would underestimate it.
 
-While this model can predict churn it does not have the ability to prevent churn. This study does provide insights on the affects of age, bank balance and credit score have on churn. Further investigation on these items may lead the Bank to develop different services to prevent churn. A break down of the types of products customers hold would also add value to any future study.
+While this model can predict churn it, does not have the ability to prevent churn. This study does provide insights into the effects that age, bank balance and credit score have on churn. Further investigation on these items may lead the Bank to develop different services to prevent churn. A breakdown of the types of products customers hold would also add value to any future study.
+
+```{r r version, echo=FALSE}
+version$version.string
+```
+
+## References
