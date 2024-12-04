@@ -5,11 +5,6 @@
 #############################################################################
 
 
-setwd("~/My Docs/R_Rstudio/Projects/Bank Churn")
-
-citation()
-version$version.string
-
 # https://www.kaggle.com/datasets/gauravtopre/bank-customer-churn-dataset
 
 # Load required libraries
@@ -18,11 +13,11 @@ if(!require(caret)) install.packages("caret", repos = "http://cran.us.r-project.
 if(!require(knitr)) install.packages("knitr", repos = "http://cran.us.r-project.org")
 if(!require(tinytex)) install.packages("tinytex", repos = "http://cran.us.r-project.org")
 
+
 library(tidyverse)
 library(caret)
 library(knitr)
 library(tinytex)
-
 
 # Data url
 churn_url = "https://raw.githubusercontent.com/SJRushford/Bank_Churn/refs/heads/main/Bank%20Customer%20Churn%20Prediction.csv"
@@ -96,13 +91,16 @@ churn <- churn %>%
 
 # [@soetewey][@irizarry2019]
 
+
 # Data Visualization
 # Box plots
 if(!require(gridExtra)) install.packages("gridExtra", repos = "http://cran.us.r-project.org")
 library(gridExtra)
 
 bp1 <- boxplot(score ~ churn, data = churn)
+ 
 bp1
+
 mean(churn$score)
 
 # mean credit score is 650.53
@@ -245,7 +243,7 @@ score_random_p <- bind_cols(as.numeric(random_p),as.numeric(churn$churn)) %>%
 mean(random_p)
 score_p <- sum(score_random_p$score)/10000
 
-scores <- data.frame(model=c('random_n', 'random_p'),
+scores <- data.frame(model=c('r_n', 'r_p'),
                              score=c(0.5002, 0.6733),
                      PPV=c(0,0), NPV=c(0, 0))
 
@@ -508,6 +506,9 @@ set.seed(4)
 val_rf <- predict(churn_rft, val_churn, type = "class")
 cm_rf_val <- confusionMatrix(val_rf, val_churn$churn)
 cm_rf_val
+
+# Variable Importance in the rft model
+varImpPlot(churn_rft)
 
 # Compare Test and Validate
 comp_rf <- data.frame(Model=c('Test', 'Validate'),
